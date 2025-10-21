@@ -74,49 +74,52 @@ export default function AnimatedHeader({ onToggleSidebar, isSidebarOpen }: Anima
         }}
       />
 
-      <div className="relative z-10 flex items-center space-x-4">
-        {onToggleSidebar && (
-          <motion.button
-            onClick={onToggleSidebar}
-            className="p-3 rounded-xl text-gray-600 hover:bg-white hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
+      {/* Botón de filtro fijo */}
+      {onToggleSidebar && (
+        <motion.button
+          onClick={onToggleSidebar}
+          className="fixed top-4 left-4 z-50 p-3 rounded-xl bg-white shadow-lg hover:shadow-xl text-blue-600 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 group"
+          variants={buttonVariants}
+          whileHover="hover"
+          whileTap="tap"
+          title="Filtros"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          <motion.svg 
+            className="h-6 w-6" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+            animate={isSidebarOpen ? { rotate: 180 } : { rotate: 0 }}
+            transition={{ duration: 0.3 }}
           >
-            <motion.svg 
-              className="h-6 w-6" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-              animate={isSidebarOpen ? { rotate: 90 } : { rotate: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </motion.svg>
-          </motion.button>
-        )}
-        
-        <div>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+          </motion.svg>
+          
+          {/* Tooltip */}
+          <span className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none">
+            Filtros
+          </span>
+        </motion.button>
+      )}
+
+      <div className="relative z-10 flex items-center justify-center w-full pl-16">
+        <div className="text-center">
           <motion.h1 
             className="text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent"
+            initial="hidden"
+            animate="visible"
             variants={titleVariants}
-            animate={{
-              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-            style={{
-              backgroundSize: '200% 200%',
-            }}
           >
             Pokémon Dashboard
           </motion.h1>
           
           <motion.p 
-            className="text-gray-600 text-lg font-medium hidden sm:block"
+            className="text-gray-600 text-lg font-medium"
+            initial="hidden"
+            animate="visible"
             variants={subtitleVariants}
           >
             Explora el mundo de los Pokémon con información detallada

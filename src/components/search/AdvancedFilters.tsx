@@ -86,7 +86,7 @@ export default function AdvancedFilters({ onFiltersChange }: AdvancedFiltersProp
             <select
               value={filters.generation}
               onChange={(e) => handleFilterChange('generation', e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
             >
               <option value="">Todas las generaciones</option>
               <option value="1">Generación I (Kanto)</option>
@@ -110,13 +110,13 @@ export default function AdvancedFilters({ onFiltersChange }: AdvancedFiltersProp
               <select
                 value={filters.sortBy}
                 onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
               >
                 <option value="id">Número</option>
                 <option value="name">Nombre</option>
-                <option value="height">Altura</option>
-                <option value="weight">Peso</option>
-                <option value="base_experience">Experiencia</option>
+                <option value="height" disabled>Altura (próximamente)</option>
+                <option value="weight" disabled>Peso (próximamente)</option>
+                <option value="base_experience" disabled>Experiencia (próximamente)</option>
               </select>
             </div>
             <div>
@@ -126,7 +126,7 @@ export default function AdvancedFilters({ onFiltersChange }: AdvancedFiltersProp
               <select
                 value={filters.sortOrder}
                 onChange={(e) => handleFilterChange('sortOrder', e.target.value as 'asc' | 'desc')}
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
               >
                 <option value="asc">Ascendente</option>
                 <option value="desc">Descendente</option>
@@ -134,10 +134,11 @@ export default function AdvancedFilters({ onFiltersChange }: AdvancedFiltersProp
             </div>
           </div>
 
-          {/* Estadísticas totales */}
-          <div>
+          {/* Estadísticas totales - Temporalmente deshabilitado */}
+          <div className="opacity-50 pointer-events-none">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Estadísticas Totales
+              <span className="text-xs text-gray-500 ml-2">(próximamente)</span>
             </label>
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -147,8 +148,9 @@ export default function AdvancedFilters({ onFiltersChange }: AdvancedFiltersProp
                   min="0"
                   max="1000"
                   value={filters.minStats}
-                  onChange={(e) => handleFilterChange('minStats', parseInt(e.target.value) || 0)}
-                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  disabled
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+                  placeholder="0"
                 />
               </div>
               <div>
@@ -158,8 +160,9 @@ export default function AdvancedFilters({ onFiltersChange }: AdvancedFiltersProp
                   min="0"
                   max="1000"
                   value={filters.maxStats}
-                  onChange={(e) => handleFilterChange('maxStats', parseInt(e.target.value) || 1000)}
-                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  disabled
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+                  placeholder="1000"
                 />
               </div>
             </div>

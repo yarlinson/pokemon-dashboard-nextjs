@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { usePokemonPagination } from '../../hooks/usePokemonPagination';
-import { useSidebar } from '../../hooks/useSidebar';
 import EnhancedPokemonCard from '../ui/EnhancedPokemonCard';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import ErrorMessage from '../ui/ErrorMessage';
@@ -15,10 +14,14 @@ import LoadingNotification from '../ui/LoadingNotification';
 import EnhancedPagination from '../ui/EnhancedPagination';
 import StaggeredGrid from '../ui/StaggeredGrid';
 
-export default function PokemonList() {
+interface PokemonListProps {
+  isSidebarOpen: boolean;
+  onToggleSidebar: () => void;
+}
+
+export default function PokemonList({ isSidebarOpen, onToggleSidebar }: PokemonListProps) {
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [advancedFilters, setAdvancedFilters] = useState<any>(null);
-  const { isOpen: isSidebarOpen, toggle: toggleSidebar } = useSidebar();
 
   const {
     pokemon: filteredPokemon,
@@ -37,6 +40,7 @@ export default function PokemonList() {
   } = usePokemonPagination({
     pageSize: 20,
     selectedTypes,
+    advancedFilters,
   });
 
   if (isLoading) {
@@ -68,7 +72,7 @@ export default function PokemonList() {
         onTypeChange={setSelectedTypes}
         onFiltersChange={setAdvancedFilters}
         isOpen={isSidebarOpen}
-        onToggle={toggleSidebar}
+        onToggle={onToggleSidebar}
       />
 
       <AnimatedContainer>

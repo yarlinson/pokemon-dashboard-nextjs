@@ -63,12 +63,17 @@ export default function FilterIndicator({
             <div className="flex flex-wrap gap-1">
               {advancedFilters.generation && (
                 <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
-                  Gen {advancedFilters.generation}
+                  Generación {advancedFilters.generation}
                 </span>
               )}
-              {advancedFilters.sortBy && advancedFilters.sortBy !== 'id' && (
+              {advancedFilters.sortBy && (
                 <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
-                  Orden: {advancedFilters.sortBy}
+                  {advancedFilters.sortBy === 'id' ? 'Por Número' : 
+                   advancedFilters.sortBy === 'name' ? 'Por Nombre' :
+                   advancedFilters.sortBy === 'height' ? 'Por Altura' :
+                   advancedFilters.sortBy === 'weight' ? 'Por Peso' : 'Por Experiencia'}
+                  {' '}
+                  ({advancedFilters.sortOrder === 'asc' ? '↑' : '↓'})
                 </span>
               )}
               {(advancedFilters.minStats > 0 || advancedFilters.maxStats < 1000) && (

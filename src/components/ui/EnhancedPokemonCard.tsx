@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -15,6 +15,14 @@ interface EnhancedPokemonCardProps {
 export default function EnhancedPokemonCard({ pokemon, index }: EnhancedPokemonCardProps) {
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  
+  // Generar posiciones de partículas aleatorias una sola vez
+  const particlePositions = useMemo(() => {
+    return Array.from({ length: 6 }, () => ({
+      x: (Math.random() - 0.5) * 100,
+      y: (Math.random() - 0.5) * 100,
+    }));
+  }, []);
   
   const pokemonId = pokemonUtils.extractIdFromUrl(pokemon.url);
   const formattedName = pokemonUtils.formatName(pokemon.name);
@@ -192,7 +200,7 @@ export default function EnhancedPokemonCard({ pokemon, index }: EnhancedPokemonC
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {[...Array(6)].map((_, i) => (
+            {particlePositions.map((pos, i) => (
               <motion.div
                 key={i}
                 className="absolute w-1 h-1 bg-blue-400 rounded-full"
@@ -201,8 +209,8 @@ export default function EnhancedPokemonCard({ pokemon, index }: EnhancedPokemonC
                   top: '50%',
                 }}
                 animate={{
-                  x: [0, (Math.random() - 0.5) * 100],
-                  y: [0, (Math.random() - 0.5) * 100],
+                  x: [0, pos.x],
+                  y: [0, pos.y],
                   opacity: [1, 0],
                   scale: [0, 1, 0],
                 }}
