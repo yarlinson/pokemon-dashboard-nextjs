@@ -21,3 +21,4 @@ export default function AnimatedContainer({ children, className = '' }: Animated
   );
 }
 
+

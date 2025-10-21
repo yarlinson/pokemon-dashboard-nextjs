@@ -22,3 +22,4 @@ export function usePokemonByType(typeName: string, enabled: boolean = true) {
   });
 }
 
+

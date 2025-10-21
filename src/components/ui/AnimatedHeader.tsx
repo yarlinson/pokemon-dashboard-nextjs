@@ -146,3 +146,4 @@ export default function AnimatedHeader({ onToggleSidebar, isSidebarOpen }: Anima
   );
 }
 
+

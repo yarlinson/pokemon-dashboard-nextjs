@@ -46,3 +46,4 @@ export function usePokemonWithTypes(limit: number = 20) {
   };
 }
 
+

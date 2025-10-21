@@ -29,3 +29,4 @@ export default function PokemonAbilities({ abilities }: PokemonAbilitiesProps) {
   );
 }
 
+
