@@ -1,9 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { usePokemonList } from './usePokemon';
+
+interface AdvancedFilters {
+  generation?: string;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+  minStats?: number;
+  maxStats?: number;
+}
 
 interface FilterState {
   selectedTypes: string[];
-  advancedFilters: any;
+  advancedFilters: AdvancedFilters | null;
 }
 
 export function useSmartPokemonLoading(limit: number = 20, filters: FilterState) {
@@ -19,10 +27,10 @@ export function useSmartPokemonLoading(limit: number = 20, filters: FilterState)
     isError,
   } = usePokemonList(limit);
 
-  const allPokemon = data?.pages.flatMap(page => page.results) || [];
+  const allPokemon = useMemo(() => data?.pages.flatMap(page => page.results) || [], [data]);
 
   // Función para contar Pokémon filtrados
-  const getFilteredCount = (pokemonList: any[], filters: FilterState) => {
+  const getFilteredCount = (pokemonList: { name: string }[], filters: FilterState) => {
     if (filters.selectedTypes.length === 0) return pokemonList.length;
     
     const typePokemonMap: { [key: string]: string[] } = {

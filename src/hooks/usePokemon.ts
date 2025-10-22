@@ -6,7 +6,7 @@ import { Pokemon, PokemonListResponse } from '../lib/types';
 export const usePokemonList = (limit: number = 20) => {
   return useInfiniteQuery<PokemonListResponse>({
     queryKey: ['pokemon-list', limit],
-    queryFn: ({ pageParam = 0 }) => pokemonApi.getPokemonList(pageParam, limit),
+    queryFn: ({ pageParam = 0 }) => pokemonApi.getPokemonList(Number(pageParam), limit),
     getNextPageParam: (lastPage) => {
       if (lastPage.next) {
         const url = new URL(lastPage.next);

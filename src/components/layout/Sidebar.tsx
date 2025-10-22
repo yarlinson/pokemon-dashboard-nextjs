@@ -1,14 +1,21 @@
 'use client';
 
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import TypeFilter from '../search/TypeFilter';
 import AdvancedFilters from '../search/AdvancedFilters';
 
+interface AdvancedFilters {
+  generation?: string;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+  minStats?: number;
+  maxStats?: number;
+}
+
 interface SidebarProps {
   selectedTypes: string[];
   onTypeChange: (types: string[]) => void;
-  onFiltersChange: (filters: any) => void;
+  onFiltersChange: (filters: AdvancedFilters | null) => void;
   isOpen: boolean;
   onToggle: () => void;
 }

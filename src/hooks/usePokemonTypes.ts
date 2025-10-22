@@ -7,7 +7,7 @@ export function usePokemonTypes() {
     queryKey: ['pokemon-types'],
     queryFn: getPokemonTypes,
     staleTime: 1000 * 60 * 60, // 1 hora
-    cacheTime: 1000 * 60 * 60 * 24, // 24 horas
+    gcTime: 1000 * 60 * 60 * 24, // 24 horas
   });
 }
 
@@ -18,7 +18,7 @@ export function usePokemonByType(typeName: string, enabled: boolean = true) {
     queryFn: () => getPokemonByType(typeName),
     enabled: enabled && !!typeName,
     staleTime: 1000 * 60 * 30, // 30 minutos
-    cacheTime: 1000 * 60 * 60 * 2, // 2 horas
+    gcTime: 1000 * 60 * 60 * 2, // 2 horas
   });
 }
 

@@ -1,16 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { usePokemonPagination } from '../../hooks/usePokemonPagination';
 import EnhancedPokemonCard from '../ui/EnhancedPokemonCard';
-import LoadingSpinner from '../ui/LoadingSpinner';
 import ErrorMessage from '../ui/ErrorMessage';
 import PokemonListSkeleton from '../ui/PokemonListSkeleton';
 import SearchBar from '../search/SearchBar';
 import Sidebar from '../layout/Sidebar';
 import FilterIndicator from '../layout/FilterIndicator';
 import AnimatedContainer from '../ui/AnimatedContainer';
-import LoadingNotification from '../ui/LoadingNotification';
 import EnhancedPagination from '../ui/EnhancedPagination';
 import StaggeredGrid from '../ui/StaggeredGrid';
 
@@ -21,21 +19,22 @@ interface PokemonListProps {
 
 export default function PokemonList({ isSidebarOpen, onToggleSidebar }: PokemonListProps) {
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const [advancedFilters, setAdvancedFilters] = useState<any>(null);
+  const [advancedFilters, setAdvancedFilters] = useState<{
+    generation?: string;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
+    minStats?: number;
+    maxStats?: number;
+  } | null>(null);
 
   const {
     pokemon: filteredPokemon,
     currentPage,
     totalPages,
     totalPokemon,
-    hasNextPage,
-    hasPrevPage,
     isLoading,
     isError,
-    error,
     goToPage,
-    nextPage,
-    prevPage,
     allTypePokemon,
   } = usePokemonPagination({
     pageSize: 20,

@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 import { usePokemonList } from './usePokemon';
-import { pokemonApi } from '../lib/api';
-import { Pokemon } from '../lib/types';
 
 interface PokemonWithTypes {
   name: string;

@@ -44,8 +44,7 @@ export default function EnhancedPokemonCard({ pokemon, index }: EnhancedPokemonC
       rotateY: 0,
       transition: {
         duration: 0.6,
-        delay: index * 0.1,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        delay: index * 0.1
       }
     },
     hover: {
@@ -53,8 +52,7 @@ export default function EnhancedPokemonCard({ pokemon, index }: EnhancedPokemonC
       scale: 1.05,
       rotateY: 5,
       transition: {
-        duration: 0.3,
-        ease: 'easeOut'
+        duration: 0.3
       }
     }
   };
@@ -62,25 +60,18 @@ export default function EnhancedPokemonCard({ pokemon, index }: EnhancedPokemonC
   const imageVariants = {
     hover: {
       scale: 1.2,
-      rotate: [0, -5, 5, 0],
       transition: {
-        duration: 0.6,
-        ease: 'easeInOut'
+        duration: 0.6
       }
     }
   };
 
   const glowVariants = {
     hover: {
-      boxShadow: [
-        '0 0 0 0 rgba(59, 130, 246, 0)',
-        '0 0 20px 10px rgba(59, 130, 246, 0.3)',
-        '0 0 0 0 rgba(59, 130, 246, 0)',
-      ],
+      boxShadow: '0 0 20px 10px rgba(59, 130, 246, 0.3)',
       transition: {
         duration: 1.5,
-        repeat: Infinity,
-        ease: 'easeInOut'
+        repeat: Infinity
       }
     }
   };

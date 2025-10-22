@@ -39,12 +39,12 @@ export function usePokemonPagination({
   const [allTypePokemon, setAllTypePokemon] = useState<PokemonListItem[]>([]);
 
   // Obtener Pokémon por tipo si hay filtros activos
-  const { data: typePokemonData, isLoading: isLoadingTypePokemon } = useQuery({
+  const { data: _typePokemonData, isLoading: _isLoadingTypePokemon } = useQuery({
     queryKey: ['pokemon-by-type', selectedTypes[0]],
     queryFn: () => getPokemonByType(selectedTypes[0]),
     enabled: selectedTypes.length === 1,
     staleTime: 1000 * 60 * 30, // 30 minutos
-    cacheTime: 1000 * 60 * 60, // 1 hora
+    gcTime: 1000 * 60 * 60, // 1 hora
   });
 
   // Cargar Pokémon de todos los tipos seleccionados
@@ -91,7 +91,7 @@ export function usePokemonPagination({
     queryKey: ['pokemon-page', currentPage, pageSize, advancedFilters?.generation],
     queryFn: () => pokemonApi.getPokemonList(offset, limit),
     staleTime: 1000 * 60 * 5, // 5 minutos
-    cacheTime: 1000 * 60 * 30, // 30 minutos
+    gcTime: 1000 * 60 * 30, // 30 minutos
   });
 
   // Función para cambiar de página
@@ -164,7 +164,7 @@ export function usePokemonPagination({
     }
 
     return results;
-  }, [selectedTypes, allTypePokemon, currentPage, pageSize, pageData, advancedFilters]);
+  }, [selectedTypes, allTypePokemon, currentPage, pageSize, pageData, advancedFilters, applySorting]);
 
   // Calcular total de páginas
   const totalPokemon = useMemo(() => {
@@ -194,7 +194,7 @@ export function usePokemonPagination({
     hasPrevPage: currentPage > 1,
     
     // Estados
-    isLoading: isLoading || isLoadingTypePokemon,
+    isLoading: isLoading || _isLoadingTypePokemon,
     isError,
     error,
     

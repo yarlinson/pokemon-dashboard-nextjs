@@ -51,8 +51,7 @@ export default function EnhancedPagination({
       y: -2,
       boxShadow: '0 8px 25px rgba(59, 130, 246, 0.3)',
       transition: {
-        duration: 0.2,
-        ease: 'easeOut'
+        duration: 0.2
       }
     },
     tap: {
@@ -63,26 +62,7 @@ export default function EnhancedPagination({
     }
   };
 
-  const pageVariants = {
-    hidden: { opacity: 0, scale: 0.8, y: 20 },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
-      y: 0,
-      transition: {
-        duration: 0.3,
-        ease: 'easeOut'
-      }
-    },
-    exit: { 
-      opacity: 0, 
-      scale: 0.8, 
-      y: -20,
-      transition: {
-        duration: 0.2
-      }
-    }
-  };
+  // Removed unused pageVariants
 
   return (
     <motion.div 
@@ -99,7 +79,6 @@ export default function EnhancedPagination({
         variants={buttonVariants}
         whileHover="hover"
         whileTap="tap"
-        whileDisabled={{ scale: 1, y: 0 }}
       >
         <motion.div 
           className="flex items-center space-x-2"
@@ -156,7 +135,6 @@ export default function EnhancedPagination({
         variants={buttonVariants}
         whileHover="hover"
         whileTap="tap"
-        whileDisabled={{ scale: 1, y: 0 }}
       >
         <motion.div 
           className="flex items-center space-x-2"

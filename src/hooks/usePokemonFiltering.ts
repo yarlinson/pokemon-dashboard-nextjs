@@ -14,20 +14,20 @@ interface FilterState {
 
 export function usePokemonFiltering(pokemonList: PokemonListItem[], filters: FilterState) {
   const filteredPokemon = useMemo(() => {
-    let filtered = [...pokemonList];
+    const filtered = [...pokemonList];
 
     // Filtrar por tipos (esto requeriría datos adicionales de la API)
     // Por ahora, solo aplicamos filtros avanzados
     
     // Aplicar filtros avanzados si existen
     if (filters.advancedFilters) {
-      const { sortBy, sortOrder, minStats, maxStats } = filters.advancedFilters;
+      const { sortBy, sortOrder } = filters.advancedFilters;
       
       // Ordenar por el campo seleccionado
       if (sortBy && sortBy !== 'id') {
         filtered.sort((a, b) => {
-          let aValue: any;
-          let bValue: any;
+          let aValue: string;
+          let bValue: string;
           
           switch (sortBy) {
             case 'name':

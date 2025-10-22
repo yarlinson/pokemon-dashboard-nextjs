@@ -15,8 +15,7 @@ export default function AnimatedHeader({ onToggleSidebar, isSidebarOpen }: Anima
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        duration: 0.8
       }
     }
   };
@@ -28,8 +27,7 @@ export default function AnimatedHeader({ onToggleSidebar, isSidebarOpen }: Anima
       y: 0,
       transition: {
         duration: 0.6,
-        delay: 0.3,
-        ease: 'easeOut'
+        delay: 0.3
       }
     }
   };
@@ -37,10 +35,8 @@ export default function AnimatedHeader({ onToggleSidebar, isSidebarOpen }: Anima
   const buttonVariants = {
     hover: {
       scale: 1.05,
-      rotate: [0, -5, 5, 0],
       transition: {
-        duration: 0.3,
-        ease: 'easeInOut'
+        duration: 0.3
       }
     },
     tap: {

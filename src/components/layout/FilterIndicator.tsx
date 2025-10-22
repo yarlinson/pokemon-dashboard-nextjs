@@ -2,9 +2,17 @@
 
 import { motion } from 'framer-motion';
 
+interface AdvancedFilters {
+  generation?: string;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+  minStats?: number;
+  maxStats?: number;
+}
+
 interface FilterIndicatorProps {
   selectedTypes: string[];
-  advancedFilters: any;
+  advancedFilters: AdvancedFilters | null;
   onClearAll: () => void;
 }
 
@@ -76,9 +84,9 @@ export default function FilterIndicator({
                   ({advancedFilters.sortOrder === 'asc' ? '↑' : '↓'})
                 </span>
               )}
-              {(advancedFilters.minStats > 0 || advancedFilters.maxStats < 1000) && (
+              {((advancedFilters.minStats ?? 0) > 0 || (advancedFilters.maxStats ?? 1000) < 1000) && (
                 <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
-                  Stats: {advancedFilters.minStats}-{advancedFilters.maxStats}
+                  Stats: {advancedFilters.minStats ?? 0}-{advancedFilters.maxStats ?? 1000}
                 </span>
               )}
             </div>

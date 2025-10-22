@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+// Removed unused import
 import { useTypes } from '../../hooks/usePokemon';
 import { pokemonUtils } from '../../lib/api';
 import LoadingSpinner from '../ui/LoadingSpinner';
@@ -42,7 +42,7 @@ export default function TypeFilter({ selectedTypes, onTypeChange }: TypeFilterPr
   }
 
   // Filtrar tipos que no son relevantes para Pokémon
-  const relevantTypes = typesData.results.filter(type => 
+  const relevantTypes = typesData.results.filter((type: { name: string }) => 
     !['unknown', 'shadow'].includes(type.name)
   );
 
@@ -61,7 +61,7 @@ export default function TypeFilter({ selectedTypes, onTypeChange }: TypeFilterPr
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {relevantTypes.map((type) => {
+        {relevantTypes.map((type: { name: string }) => {
           const isSelected = selectedTypes.includes(type.name);
           return (
             <button

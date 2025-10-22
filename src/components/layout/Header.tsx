@@ -7,7 +7,7 @@ interface HeaderProps {
   isSidebarOpen?: boolean;
 }
 
-export default function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
+export default function Header({ onToggleSidebar: _onToggleSidebar, isSidebarOpen: _isSidebarOpen }: HeaderProps) {
   return (
     <motion.header
       initial={{ opacity: 0, y: -20 }}

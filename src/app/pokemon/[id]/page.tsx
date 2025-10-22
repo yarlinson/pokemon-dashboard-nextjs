@@ -2,9 +2,9 @@ import { notFound } from 'next/navigation';
 import PokemonDetail from '../../../components/pokemon/PokemonDetail';
 
 interface PokemonPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function PokemonPage({ params }: PokemonPageProps) {

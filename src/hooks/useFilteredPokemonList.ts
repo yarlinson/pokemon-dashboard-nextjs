@@ -24,7 +24,7 @@ export function useFilteredPokemonList(limit: number = 20, filters: FilterState)
     isError,
   } = usePokemonList(limit);
 
-  const allPokemon = data?.pages.flatMap(page => page.results) || [];
+  const allPokemon = useMemo(() => data?.pages.flatMap(page => page.results) || [], [data]);
 
   // Función para contar Pokémon filtrados sin aplicar el filtro completo
   const getFilteredCount = (pokemonList: PokemonListItem[], filters: FilterState) => {
@@ -111,8 +111,8 @@ export function useFilteredPokemonList(limit: number = 20, filters: FilterState)
       
       if (sortBy && sortBy !== 'id') {
         filtered.sort((a, b) => {
-          let aValue: any;
-          let bValue: any;
+          let aValue: string;
+          let bValue: string;
           
           switch (sortBy) {
             case 'name':

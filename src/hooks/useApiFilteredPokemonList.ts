@@ -25,10 +25,10 @@ export function useApiFilteredPokemonList(limit: number = 20, filters: FilterSta
     isError,
   } = usePokemonList(limit);
 
-  const allPokemon = allPokemonData?.pages.flatMap(page => page.results) || [];
+  const allPokemon = useMemo(() => allPokemonData?.pages.flatMap(page => page.results) || [], [allPokemonData]);
 
   // Obtener Pokémon por tipo desde la API
-  const { data: typePokemonData, isLoading: isLoadingTypePokemon } = usePokemonByType(
+  const { data: _typePokemonData, isLoading: _isLoadingTypePokemon } = usePokemonByType(
     filters.selectedTypes[0] || '',
     filters.selectedTypes.length === 1
   );
@@ -88,7 +88,7 @@ export function useApiFilteredPokemonList(limit: number = 20, filters: FilterSta
         }
       }
     }
-  }, [filters, allPokemon, hasNextPage, isFetchingNextPage, fetchNextPage]);
+  }, [filters, allPokemon, hasNextPage, isFetchingNextPage, fetchNextPage, getFilteredCount]);
 
   // Filtrar Pokémon basado en los filtros seleccionados
   const filteredPokemon = useMemo(() => {
@@ -116,7 +116,7 @@ export function useApiFilteredPokemonList(limit: number = 20, filters: FilterSta
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    isLoading: isLoading || isLoadingTypePokemon,
+    isLoading: isLoading || _isLoadingTypePokemon,
     isError,
     allTypePokemon, // Para debugging
   };

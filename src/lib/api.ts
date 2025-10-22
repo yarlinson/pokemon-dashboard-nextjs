@@ -68,7 +68,7 @@ export const pokemonApi = {
       // La API de Pokémon no tiene búsqueda directa, así que implementamos una búsqueda básica
       // En una implementación real, podrías usar un índice local o una API de búsqueda
       const response = await api.get(`/pokemon?limit=1000`); // Obtener muchos Pokémon
-      const filtered = response.data.results.filter((pokemon: any) =>
+      const filtered = response.data.results.filter((pokemon: { name: string }) =>
         pokemon.name.toLowerCase().includes(query.toLowerCase())
       );
       return {
@@ -171,7 +171,7 @@ export async function getPokemonTypes(): Promise<{ name: string; url: string }[]
 export async function getPokemonByType(typeName: string): Promise<PokemonListItem[]> {
   try {
     const response = await api.get(`/type/${typeName.toLowerCase()}`);
-    return response.data.pokemon.map((pokemon: any) => ({
+    return response.data.pokemon.map((pokemon: { pokemon: { name: string; url: string } }) => ({
       name: pokemon.pokemon.name,
       url: pokemon.pokemon.url,
     }));
